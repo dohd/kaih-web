@@ -11,7 +11,8 @@
       <ul>
         <li><a href="/#about">About Us</a></li>
         <li><a href="/#services">Our Programs</a></li>
-        <li><a href="{{ route('news') }}">News</a></li>
+        <li><a href="/#pricing">Our Partners</a></li>
+        <li><a href="{{ route('news') }}" data-link="news">News</a></li>
         <!-- 
         <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>

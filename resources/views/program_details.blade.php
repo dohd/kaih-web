@@ -47,3 +47,10 @@
 
   </main>    
 @endsection
+
+@section('extra-scripts')
+  <script>
+    let menulink = document.querySelectorAll('[href="/#services"]')[0];
+    if (menulink) menulink.classList.add('active');
+  </script>
+@endsection

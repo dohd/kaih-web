@@ -56,5 +56,6 @@
 
     <!-- Main JS File -->
     <script src="{{ asset('js/main.js') }}"></script>
+    @yield('extra-scripts')
   </body>
 </html>

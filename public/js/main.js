@@ -188,9 +188,35 @@
       } else {
         navmenulink.classList.remove('active');
       }
-    })
+    });
   }
   window.addEventListener('load', navmenuScrollspy);
   document.addEventListener('scroll', navmenuScrollspy);
+
+
+  /**
+   * Custom Scrollspy
+   */
+  function customScrollspy() {
+    let sections = document.querySelectorAll('.features, .testimonials, .recent-posts');
+    sections.forEach(section => {
+      let menulink;
+      let sectionId = section.getAttribute('id')
+      if (sectionId == 'features') {
+        menulink = document.querySelectorAll('[href="/#about"]')[0];
+      } else if (sectionId == 'testimonials') {
+        menulink = document.querySelectorAll('[href="/#services"]')[0];
+      } else if (sectionId == 'recent-posts') {
+        menulink = document.querySelectorAll('[data-link="news"]')[0];
+      }
+      let position = window.scrollY + 200;
+      if (position >= section.offsetTop && position <= (section.offsetTop + section.offsetHeight)) {
+        document.querySelectorAll('.navmenu a.active').forEach(link => link.classList.remove('active'));
+        if (menulink) menulink.classList.add('active');
+      }
+    });
+  }
+  window.addEventListener('load', customScrollspy);
+  document.addEventListener('scroll', customScrollspy);
 
 })();

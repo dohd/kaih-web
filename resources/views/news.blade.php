@@ -125,3 +125,10 @@
 
   </main>
 @endsection
+
+@section('extra-scripts')
+  <script>
+    let menulink = document.querySelectorAll('[data-link="news"]')[0];
+    if (menulink) menulink.classList.add('active');
+  </script>
+@endsection
