@@ -19,7 +19,7 @@
             <p class="post-category">Access to Justice</p>
 
             <h2 class="title">
-              <a href="blog-details.html">Dolorum optio tempore voluptas dignissimos</a>
+              <a href="{{ route('news_details', ['id' => 1]) }}">Dolorum optio tempore voluptas dignissimos</a>
             </h2>
 
             <div class="d-flex align-items-center">
@@ -45,7 +45,7 @@
             <p class="post-category">Self Advocacy</p>
 
             <h2 class="title">
-              <a href="blog-details.html">Nisi magni odit consequatur autem nulla dolorem</a>
+              <a href="{{ route('news_details', ['id' => 2]) }}">Nisi magni odit consequatur autem nulla dolorem</a>
             </h2>
 
             <div class="d-flex align-items-center">
@@ -71,7 +71,7 @@
             <p class="post-category">Vocational Training</p>
 
             <h2 class="title">
-              <a href="blog-details.html">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
+              <a href="{{ route('news_details', ['id' => 3]) }}">Possimus soluta ut id suscipit ea ut in quo quia et soluta</a>
             </h2>
 
             <div class="d-flex align-items-center">
