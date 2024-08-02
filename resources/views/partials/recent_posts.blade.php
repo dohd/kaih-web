@@ -31,6 +31,7 @@
                 </p>
               </div>
             </div>
+            <a href="{{ route('news_details', ['id' => 1]) }}" class="btn btn-outline-danger mt-2">Read More</a>
 
           </article>
         </div><!-- End post list item -->
@@ -57,7 +58,7 @@
                 </p>
               </div>
             </div>
-
+            <a href="{{ route('news_details', ['id' => 2]) }}" class="btn btn-outline-danger mt-2">Read More</a>
           </article>
         </div><!-- End post list item -->
 
@@ -83,7 +84,7 @@
                 </p>
               </div>
             </div>
-
+            <a href="{{ route('news_details', ['id' => 3]) }}" class="btn btn-outline-danger mt-2">Read More</a>
           </article>
         </div><!-- End post list item -->
 
