@@ -165,3 +165,10 @@ if (!function_exists('tidCode')) {
         return $prefix . sprintf('%0'.$count.'d', $num);
     }
 }
+
+if (!function_exists('toArray')) {
+    function toArray($data)
+    {
+        return json_decode(json_encode($data), true);
+    }
+}

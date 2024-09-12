@@ -167,6 +167,7 @@ return [
          */
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
+        Contentful\Laravel\ContentfulServiceProvider::class,
 
         /*
          * Application Service Providers...
