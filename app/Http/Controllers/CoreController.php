@@ -29,9 +29,15 @@ class CoreController extends Controller
      */
     public function index()
     {
-        $slide_texts = [];
-
-        return view('index', compact('slide_texts'));
+        return view('index', [
+            'headerSliderTexts' => $this->headerSliderTexts()->original,
+            'aboutUs' => $this->aboutUs()->original,
+            'pillars' => $this->pillars()->original,
+            'programs' => $this->programs()->original,
+            'testimonials' => $this->testimonials()->original,
+            'partners' => $this->partners()->original,
+            'blogPosts' => $this->blogPosts()->original,
+        ]);
     }
 
     /**
@@ -43,7 +49,7 @@ class CoreController extends Controller
         try {
             $query = $this->query->setContentType('header_images');
             $client = $this->client->getEntries($query);
-            $images = array_map(fn ($client) => array_map(fn ($v) => $v->getFile(), $client->getImage()), $client->getItems());
+            $images = array_map(fn ($client) => array_map(fn ($v) => toArray($v->getFile()), $client->getImage()), $client->getItems());
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -58,13 +64,13 @@ class CoreController extends Controller
     public function headerSliderTexts()
     {
         try {
-            $query = $this->query->setContentType('header_slider_texts');
+            $query = $this->query->setContentType('header_slider_texts')->orderBy('sys.createdAt');;
             $client = $this->client->getEntries($query);
             $slider_texts = array_map(fn ($client) => toArray($client)['fields'], $client->getItems());
         } catch (\Throwable $th) {
             //throw $th;
         }
-        $slider_texts = @$slide_texts ?: [];
+        $slider_texts = @$slider_texts ?: [];
         return response()->json($slider_texts);
     }
 
@@ -72,7 +78,7 @@ class CoreController extends Controller
      * Fetch About Us
      * @return json
      */
-    public function aboutUsSegments()
+    public function aboutUs()
     {
         try {
             //code...
@@ -94,7 +100,7 @@ class CoreController extends Controller
     {
         try {
             //code...
-            $query = $this->query->setContentType('pillars');
+            $query = $this->query->setContentType('pillars')->orderBy('sys.createdAt');
             $client = $this->client->getEntries($query);
             $pillars = array_map(fn ($client) => toArray($client)['fields'], $client->getItems());
         } catch (\Throwable $th) {
@@ -112,7 +118,7 @@ class CoreController extends Controller
     {
         try {
             //code...
-            $query = $this->query->setContentType('programs');
+            $query = $this->query->setContentType('programs')->orderBy('sys.createdAt');
             $client = $this->client->getEntries($query);
             $programs = array_map(fn ($client) => [
                 'id' => $client->getId(),
@@ -120,11 +126,34 @@ class CoreController extends Controller
                 'shortDescription' => $client->getShortDescription(),
                 'description' => $client->getDescription(),
             ], $client->getItems());
+            // dd($programs);
         } catch (\Throwable $th) {
             //throw $th;
         }
         $programs = @$programs ?: [];
         return response()->json($programs);
+    }
+
+
+    /**
+     * Fetch Program
+     * @return json
+     */
+    public function program($id)
+    {
+        try {
+            $client = $this->client->getEntry($id);
+            $program = [
+                'id' => $client->getId(),
+                'name' => $client->getName(),
+                'shortDescription' => $client->getShortDescription(),
+                'description' => $client->getDescription(),
+            ];
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $program = @$program ?: [];
+        return response()->json($program);
     }
 
     /**
@@ -155,7 +184,7 @@ class CoreController extends Controller
             //code...
             $query = $this->query->setContentType('partners');
             $client = $this->client->getEntries($query);
-            $images = array_map(fn ($client) => array_map(fn ($v) => $v->getFile(), $client->getImage()), $client->getItems());
+            $images = array_map(fn ($client) => array_map(fn ($v) => toArray($v->getFile()), $client->getImage()), $client->getItems());
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -191,20 +220,20 @@ class CoreController extends Controller
             //code...
             $query = $this->query->setContentType('blogPosts');
             $client = $this->client->getEntries($query);
-            $blog_posts = array_map(fn ($client) => [
+            $blogPosts = array_map(fn ($client) => [
                 'id' => $client->getId(),
                 'author' => $client->getAuthor(),
                 'tag' => $client->getTag()[0],
                 'shortTitle' => $client->getShortTitle(),
                 'shortDescription' => $client->getShortDescription(),
-                'date' => $client->getDate(),
+                'date' => toArray($client->getDate()),
                 'article' => $client->getArticle(),
             ], $client->getItems());
         } catch (\Throwable $th) {
             //throw $th;
         }
-        $blog_posts = @$blog_posts ?: [];
-        return response()->json($blog_posts);
+        $blogPosts = @$blogPosts ?: [];
+        return response()->json($blogPosts);
     }
 
 
@@ -221,7 +250,7 @@ class CoreController extends Controller
      * Load News detail
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function newsDetails($id)
+    public function showNews($id)
     {
         $categories = [
             1 => 'Access to Justice',
@@ -235,17 +264,11 @@ class CoreController extends Controller
      * Load program details page
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function programDetails($id)
+    public function showProgram($id)
     {
-        $programs = [
-            1 => 'Access to Justice',
-            2 => 'Access to Quality Healthcare',
-            3 => 'Self Advocacy',
-            4 => 'Vocational Training',
-            5 => 'Quality Inclusive Education',
-            6 => 'Family Empowerment'
-        ];
-        return view('program_details', ['program' => @$programs[$id]]);
+        return view('program_details', [
+            'program' => $this->program($id)->original
+        ]);
     }
 
     /**

@@ -25,6 +25,10 @@
 
     <!-- Main CSS File -->
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
+
+    <!-- quick fix because 'exports' is not defined in rich-text bundle below -->
+    <script>const exports = {};</script>
+    <script src="https://cdn.jsdelivr.net/npm/@contentful/rich-text-html-renderer@12.0.0/dist/rich-text-html-renderer.es5.min.js"></script>
   </head>
 
   <body @yield('body-class')>
@@ -50,7 +54,7 @@
     <script src="{{ asset('vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
     <script src="{{ asset('vendor/imagesloaded/imagesloaded.pkgd.min.js') }}"></script>
-    <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendor/isotope-layout/isotope.pkgd.min.js') }}"></script> --}}
     <script src="{{ asset('vendor/swiper/swiper-bundle.min.js') }}"></script>
 
     <!-- Main JS File -->

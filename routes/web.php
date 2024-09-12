@@ -16,14 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [CoreController::class, 'index']);
 Route::get('news', [CoreController::class, 'news'])->name('news');
-Route::get('news/details/{id}', [CoreController::class, 'newsDetails'])->name('news_details');
-Route::get('programs/details/{id}', [CoreController::class, 'programDetails'])->name('program_details');
+Route::get('news/{id}', [CoreController::class, 'showNews'])->name('news.show');
+Route::get('programs/{id}', [CoreController::class, 'showProgram'])->name('programs.show');
 
 // data
 Route::get('data/header_images', [CoreController::class, 'headerImages'])->name('data.header_images');
 Route::get('data/header_slider_texts', [CoreController::class, 'headerSliderTexts'])->name('data.header_slider_texts');
-Route::get('data/about_us_segments', [CoreController::class, 'aboutUsSegments'])->name('data.about_us_segments');
+Route::get('data/about_us', [CoreController::class, 'aboutUs'])->name('data.about_us');
 Route::get('data/pillars', [CoreController::class, 'pillars'])->name('data.pillars');
+Route::get('data/programs/{id}', [CoreController::class, 'program'])->name('data.get_program');
 Route::get('data/programs', [CoreController::class, 'programs'])->name('data.programs');
 Route::get('data/testimonials', [CoreController::class, 'testimonials'])->name('data.testimonials');
 Route::get('data/partners', [CoreController::class, 'partners'])->name('data.partners');

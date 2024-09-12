@@ -14,36 +14,31 @@
 
     <!-- Blog Posts Section -->
     <section id="blog-posts" class="blog-posts section">
-
       <div class="container">
-
         <div class="row gy-4">
-
-          <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <article>
-
-              <div class="post-img">
-                <img src="{{ asset('img/blog/blog-1.jpg') }}" alt="" class="img-fluid">
-              </div>
-
-              <p class="post-category">Access to Justice</p>
-
-              <h2 class="title">
-                <a href="{{ route('news_details', ['id' => 1]) }}">Dolorum optio tempore voluptas dignissimos</a>
-              </h2>
-
-              <div class="d-flex align-items-center">
-                <!-- <img src="assets/img/blog/blog-author.jpg" alt="" class="img-fluid post-author-img flex-shrink-0"> -->
-                <div class="post-meta">
-                  <!-- <p class="post-author">Maria Doe</p> -->
-                  <p class="post-date">
-                    <time datetime="2022-01-01">Jan 1, 2022</time>
-                  </p>
+          @foreach ([] as $item)
+            <!-- Post list item -->
+            <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <article>
+                <div class="post-img">
+                  <img src="{{ asset('img/blog/blog-1.jpg') }}" alt="" class="img-fluid">
                 </div>
-              </div>
+                <p class="post-category">Access to Justice</p>
+                <h2 class="title">
+                  <a href="{{ route('news_details', ['id' => 1]) }}">Dolorum optio tempore voluptas dignissimos</a>
+                </h2>
+                <div class="d-flex align-items-center">
+                  <div class="post-meta">
+                    <p class="post-date">
+                      <time datetime="2022-01-01">Jan 1, 2022</time>
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <!-- End post list item -->
+          @endforeach
 
-            </article>
-          </div><!-- End post list item -->
 
           <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
             <article>
