@@ -13,7 +13,7 @@
           <article>
 
             <div class="post-img">
-              <img src="assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+              <img src="{{ asset('img/blog/blog-1.jpg') }}" alt="" class="img-fluid">
             </div>
 
             <p class="post-category">Access to Justice</p>
@@ -40,7 +40,7 @@
           <article>
 
             <div class="post-img">
-              <img src="assets/img/blog/blog-2.jpg" alt="" class="img-fluid">
+              <img src="{{ asset('img/blog/blog-2.jpg') }}" alt="" class="img-fluid">
             </div>
 
             <p class="post-category">Self Advocacy</p>
@@ -66,7 +66,7 @@
           <article>
 
             <div class="post-img">
-              <img src="assets/img/blog/blog-3.jpg" alt="" class="img-fluid">
+              <img src="{{ asset('img/blog/blog-3.jpg') }}" alt="" class="img-fluid">
             </div>
 
             <p class="post-category">Vocational Training</p>

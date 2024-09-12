@@ -36,9 +36,7 @@
         </div>
       </div>
       <!-- End Pricing Item -->
-    </div>
 
-    <div class="row gy-3 mt-1">
       <div class="col-xl-3 col-lg-6" data-aos="fade-up" data-aos-delay="100">
         <div class="pricing-item">
           {{-- <h3>KNCHR</h3> --}}
@@ -47,7 +45,9 @@
           </div>
         </div>
       </div><!-- End Pricing Item -->
+    </div>
 
+    <div class="row gy-3 mt-1">
       <div class="col-xl-3 col-lg-6" data-aos="fade-up" data-aos-delay="200">
         <div class="pricing-item featured-">
           {{-- <h3>OSIEA</h3> --}}
