@@ -108,12 +108,12 @@ class CoreController extends Controller
             //code...
             $query = $this->query->setContentType('about_us');
             $client = $this->client->getEntries($query);
-            $segments = array_map(fn ($client) => toArray($client)['fields'], $client->getItems());
+            $aboutUs = array_map(fn ($client) => toArray($client)['fields'], $client->getItems());
         } catch (\Throwable $th) {
             //throw $th;
         }
-        $segments = @$segments[0] ?: [];
-        return response()->json($segments);
+        $aboutUs = @$aboutUs[0] ?: [];
+        return response()->json($aboutUs);
     }
 
     /**

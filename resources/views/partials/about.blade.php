@@ -8,8 +8,12 @@
 
   <div class="container">
     <div class="row gy-4">
-      <div class="col-lg-6 content seg1" data-aos="fade-up" data-aos-delay="100"></div>
-      <div class="col-lg-6 seg2" data-aos="fade-up" data-aos-delay="200"></div>      
+      <div class="col-lg-8 content descr" data-aos="fade-up" data-aos-delay="100"></div>
+      <div class="col-lg-4 seg2" data-aos="fade-up" data-aos-delay="200">
+        @if (@$aboutUs['videoUrl'])
+          <iframe width="100%" height="315" src="{{ $aboutUs['videoUrl'] }}"></iframe>
+        @endif
+      </div>      
     </div>
   </div>
 </section>
@@ -17,13 +21,9 @@
 <script>
   const aboutUs = @json(@$aboutUs);
   if (aboutUs && Object.keys(aboutUs).length) {
-    if (aboutUs.segment1) {
-      const div = document.getElementsByClassName('seg1')[0];
-      div.innerHTML = documentToHtmlString(aboutUs.segment1);
-    }
-    if (aboutUs.segment2) {
-      const div = document.getElementsByClassName('seg2')[0];
-      div.innerHTML = documentToHtmlString(aboutUs.segment2);
+    if (aboutUs.description) {
+      const div = document.getElementsByClassName('descr')[0];
+      div.innerHTML = documentToHtmlString(aboutUs.description);
     }
   }
 </script>
