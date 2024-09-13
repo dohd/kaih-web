@@ -30,6 +30,8 @@ class CoreController extends Controller
     public function index()
     {
         return view('index', [
+            'headerFooter' => $this->headerFooter()->original,
+            'headerImages' => $this->headerImages()->original,
             'headerSliderTexts' => $this->headerSliderTexts()->original,
             'aboutUs' => $this->aboutUs()->original,
             'pillars' => $this->pillars()->original,
@@ -38,7 +40,6 @@ class CoreController extends Controller
             'partners' => $this->partners()->original,
             'blogPosts' => $this->blogPosts(3)->original,
             'contacts' => $this->contacts()->original,
-            'headerFooter' => $this->headerFooter()->original,
         ]);
     }
 
@@ -72,8 +73,8 @@ class CoreController extends Controller
     {
         try {
             $query = $this->query->setContentType('header_images');
-            $entry = $this->client->getEntries($query);
-            $images = array_map(fn ($client) => array_map(fn ($v) => toArray($v->getFile()), $client->getImage()), $client->getItems());
+            $entries = $this->client->getEntries($query);
+            $images = array_map(fn ($entry) => array_map(fn ($v) => toArray($v->getFile()), $entry->getImage()), $entries->getItems());
         } catch (\Throwable $th) {
             //throw $th;
         }

@@ -12,7 +12,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url("img/working-1.jpg");
+    /* background-image: url("img/working-1.jpg"); */
     width: 100%;
     height: 100%;
     background-position: center;
@@ -33,15 +33,15 @@
   * Transitional background images
   */
   .ts-background {
-    background-image: url("img/working-1.jpg");
+    /* background-image: url("img/working-1.jpg"); */
     width: 100%;
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 1; /* Initially hidden */
-    transition: background-image 2s ease; /* Smooth transition */
-    transition: opacity 2s ease; /* Fade effect */
+    transition: background-image 3s ease; /* Smooth transition */
+    transition: opacity 3s ease; /* Fade effect */
   }
   .fade-out {
     opacity: 0; /* Fades out */
@@ -85,40 +85,44 @@
 
 @section('extra-scripts')
 <script>
-  const images = [
-    'img/working-2.jpg',
-    'img/working-3.jpg',
-    'img/working-4.jpg',
-    'img/working-1.jpg',
-  ];
+  const headerImages = @json(@$headerImages);
+  if (headerImages.length) {
+    const images = headerImages.map(v => v.url);
+    const el = document.getElementById('hero');
 
-  let i = 0;
-  const duration = 1000; // 1 second fade duration
-  const interval = 5000; // 5 seconds before switching images
-  const el = document.getElementById('hero');
-  function changeBackgroundImage() {
-    // Add fade-out effect
-    el.classList.add('fade-out');
-    setTimeout(() => {
-      // Change background image
-      i = (i + 1) % images.length;
-      el.style.backgroundImage = `url(${images[i]})`;
-      // Add fade-in effect after changing the image
-      el.classList.remove('fade-out');
-      el.classList.add('fade-in');
-    }, duration); // Wait for fade-out to complete
-  }
+    // Set the first image as default
+    el.style.backgroundImage = `url(${images[0]})`;
+    el.style.backgroundRepeat = 'no-repeat';
+    el.style.backgroundSize = 'cover';
+    el.style.backgroundPosition = 'center';
 
-  function onHeroMouseOver() {
-    setTimeout(() => {
-      el.removeEventListener('mouseover', onHeroMouseOver);
-      // Remove initial image-background with transitional
-      el.classList.remove('image-bg');
-      el.classList.add('ts-background');
-      // Automatically change the background every few seconds
-      setInterval(changeBackgroundImage, interval + duration);
-    }, 1000);
+    let i = 0;
+    const duration = 1000; // 1 second fade duration
+    const interval = 6000; // 6 seconds before switching images
+    function changeBackgroundImage() {
+      // Add fade-out effect
+      el.classList.add('fade-out');
+      setTimeout(() => {
+        // Change background image
+        i = (i + 1) % images.length;
+        el.style.backgroundImage = `url(${images[i]})`;
+        // Add fade-in effect after changing the image
+        el.classList.remove('fade-out');
+        el.classList.add('fade-in');
+      }, duration); // Wait for fade-out to complete
+    }
+  
+    function onHeroMouseOver() {
+      setTimeout(() => {
+        el.removeEventListener('mouseover', onHeroMouseOver);
+        // Remove initial image-background with transitional
+        el.classList.remove('image-bg');
+        el.classList.add('ts-background');
+        // Automatically change the background every few seconds
+        setInterval(changeBackgroundImage, interval + duration);
+      }, 1000);
+    }
+    el.addEventListener('mouseover', onHeroMouseOver);
   }
-  el.addEventListener('mouseover', onHeroMouseOver);
 </script>
 @endsection
