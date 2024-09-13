@@ -36,7 +36,7 @@ class CoreController extends Controller
             'programs' => $this->programs()->original,
             'testimonials' => $this->testimonials()->original,
             'partners' => $this->partners()->original,
-            'blogPosts' => $this->blogPosts()->original,
+            'blogPosts' => $this->blogPosts(3)->original,
         ]);
     }
 
@@ -214,21 +214,25 @@ class CoreController extends Controller
      * Fetch Blog Posts
      * @return json
      */
-    public function blogPosts()
+    public function blogPosts($limit=0, $tag='')
     {
         try {
             //code...
             $query = $this->query->setContentType('blogPosts');
-            $client = $this->client->getEntries($query);
-            $blogPosts = array_map(fn ($client) => [
-                'id' => $client->getId(),
-                'author' => $client->getAuthor(),
-                'tag' => $client->getTag()[0],
-                'shortTitle' => $client->getShortTitle(),
-                'shortDescription' => $client->getShortDescription(),
-                'date' => toArray($client->getDate()),
-                'article' => $client->getArticle(),
-            ], $client->getItems());
+            if ($limit) $query->setLimit($limit);
+            if ($tag) $query->where('fields.tag', $tag);
+
+            $entries = $this->client->getEntries($query);
+            $blogPosts = array_map(fn ($entry) => [
+                'id' => $entry->getId(),
+                'author' => $entry->getAuthor(),
+                'tag' => $entry->getTag()[0],
+                'shortTitle' => $entry->getShortTitle(),
+                'shortDescription' => $entry->getShortDescription(),
+                'date' => toArray($entry->getDate()),
+                'image' => $entry->getHeaderImage()? toArray($entry->getHeaderImage()->getFile()) : [],
+                'article' => $entry->getArticle(),
+            ], $entries->getItems());
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -236,14 +240,72 @@ class CoreController extends Controller
         return response()->json($blogPosts);
     }
 
+    /**
+     * Fetch Blog Post
+     * @return json
+     */
+    public function blogPost($id)
+    {
+        try {
+            $entry = $this->client->getEntry($id);
+            $blogPost = [
+                'id' => $entry->getId(),
+                'author' => $entry->getAuthor(),
+                'tag' => $entry->getTag()[0],
+                'shortTitle' => $entry->getShortTitle(),
+                'shortDescription' => $entry->getShortDescription(),
+                'date' => toArray($entry->getDate()),
+                'image' => $entry->getHeaderImage()? toArray($entry->getHeaderImage()->getFile()) : [],
+                'article' => $entry->getArticle(),
+            ];
+        } catch (\Throwable $th) {
+            //throw $th;
+            // dd($th);
+        }
+        $blogPost = @$blogPost ?: [];
+        return response()->json($blogPost);
+    }
 
     /**
-     * Load News page
+     * Fetch Post Tags Count
+     * @return json
+     */
+    public function postTagsCount()
+    {
+        try {
+            $query = $this->query->setContentType('blogPosts')->select(['fields.tag']);
+            
+            $entriesA = $this->client->getEntries($query->where('fields.tag', 'Access to Justice'));
+            $entriesB = $this->client->getEntries($query->where('fields.tag', 'Access to Quality Healthcare'));
+            $entriesC = $this->client->getEntries($query->where('fields.tag', 'Self Advocacy'));
+            $entriesD = $this->client->getEntries($query->where('fields.tag', 'Vocational Training'));
+            $entriesE = $this->client->getEntries($query->where('fields.tag', 'Quality Inclusive Education'));
+            $entriesF = $this->client->getEntries($query->where('fields.tag', 'Family Empowerment'));
+
+            $entriesCount = [
+                'Access to Justice' => count($entriesA->getItems()),
+                'Access to Quality Healthcare' => count($entriesB->getItems()),
+                'Self Advocacy' => count($entriesC->getItems()),
+                'Vocational Training' => count($entriesD->getItems()),
+                'Quality Inclusive Education' => count($entriesE->getItems()),
+                'Family Empowerment' => count($entriesF->getItems()),
+            ];
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+        $entriesCount = @$entriesCount ?: [];
+        return response()->json($entriesCount);
+    }
+
+    /**
+     * Load News Page
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function news()
     {
-        return view('news');
+        return view('news', [
+            'blogPosts' => $this->blogPosts(0, request('tag'))->original,
+        ]);
     }
 
     /**
@@ -252,12 +314,12 @@ class CoreController extends Controller
      */
     public function showNews($id)
     {
-        $categories = [
-            1 => 'Access to Justice',
-            2 => 'Self Advocacy',
-            3 => 'Vocational Training',
-        ];
-        return view('news_details', ['category' => @$categories[$id]]);
+        $blogPost = $this->blogPost($id)->original;
+        if (!$blogPost) return redirect()->back();
+
+        $postTagsCount = $this->postTagsCount()->original;
+
+        return view('news_details', compact('blogPost', 'postTagsCount'));
     }
 
     /**
@@ -266,9 +328,10 @@ class CoreController extends Controller
      */
     public function showProgram($id)
     {
-        return view('program_details', [
-            'program' => $this->program($id)->original
-        ]);
+        $program = $this->program($id)->original;
+        if (!$program) return redirect()->back();
+
+        return view('program_details', compact('program'));
     }
 
     /**

@@ -12,7 +12,9 @@
         <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
           <article>
             <div class="post-img">
-              <img src="asset('img/blog/blog-1.jpg')" alt="" class="img-fluid">
+              @if ($item['image'])
+                <img src="{{ $item['image']['url'] }}" alt="{{ explode('.', $item['image']['fileName'])[0] }}" class="img-fluid">
+              @endif
             </div>
             <p class="post-category">{{ $item['tag'] }}</p>
             <h2 class="title">
@@ -21,7 +23,7 @@
             <div class="d-flex align-items-center">
               <div class="post-meta">
                 <p class="post-date">
-                  <time datetime="{{ dateFormat($item['date']) }}">{{ dateFormat($item['date'], 'M d, Y') }}</time>
+                  <time datetime="{{ $item['date'] }}">{{ dateFormat($item['date'], 'M d, Y') }}</time>
                 </p>
               </div>
             </div>

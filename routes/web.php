@@ -30,4 +30,6 @@ Route::get('data/testimonials', [CoreController::class, 'testimonials'])->name('
 Route::get('data/partners', [CoreController::class, 'partners'])->name('data.partners');
 Route::get('data/contacts', [CoreController::class, 'contacts'])->name('data.contacts');
 Route::get('data/blog_posts', [CoreController::class, 'blogPosts'])->name('data.blog_posts');
+Route::get('data/blog_posts/{id}', [CoreController::class, 'blogPost'])->name('data.get_blog_post');
+Route::get('data/post_tags_count', [CoreController::class, 'postTagsCount'])->name('data.post_tags_count');
 

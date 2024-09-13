@@ -7,8 +7,8 @@
     <!-- Page Title -->
     <div class="page-title dark-background">
       <div class="container position-relative">
-        <h1>{{ @$program['name'] }}</h1>
-        <p>{{ @$program['shortDescription'] }}</p>
+        <h1>{{ $program['name'] }}</h1>
+        <p>{{ $program['shortDescription'] }}</p>
       </div>
     </div>
     <!-- End Page Title -->
@@ -35,7 +35,7 @@
     if (menulink) menulink.classList.add('active');
 
     // set program content
-    const program = @json(@$program);
+    const program = @json($program);
     if (program && program.id) {
       const div = document.getElementsByClassName('program')[0];
       div.innerHTML = documentToHtmlString(program.description);
