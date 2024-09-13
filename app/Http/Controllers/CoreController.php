@@ -37,6 +37,7 @@ class CoreController extends Controller
             'testimonials' => $this->testimonials()->original,
             'partners' => $this->partners()->original,
             'blogPosts' => $this->blogPosts(3)->original,
+            'contacts' => $this->contacts()->original,
         ]);
     }
 
