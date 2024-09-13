@@ -11,10 +11,10 @@
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="/#about">About Us</a></li>
-        <li><a href="/#services">Our Programs</a></li>
-        <li><a href="/#pricing">Our Partners</a></li>
-        <li><a href="{{ route('news') }}" data-link="news">News & Blog</a></li>
+        <li><a href="/#about"><b>About Us</b></a></li>
+        <li><a href="/#services"><b>Our Programs</b></a></li>
+        <li><a href="/#pricing"><b>Our Partners</b></a></li>
+        <li><a href="{{ route('news') }}" data-link="news"><b>News & Blog</b></a></li>
         <!-- 
         <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>
@@ -34,7 +34,7 @@
           </ul>
         </li>
         -->
-        <li><a href="/#contact">Contact</a></li>
+        <li><a href="/#contact"><b>Contact</b></a></li>
       </ul>
       <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
