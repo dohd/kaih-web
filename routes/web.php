@@ -20,6 +20,7 @@ Route::get('news/{id}', [CoreController::class, 'showNews'])->name('news.show');
 Route::get('programs/{id}', [CoreController::class, 'showProgram'])->name('programs.show');
 
 // data
+Route::get('data/header_footer', [CoreController::class, 'headerFooter'])->name('data.header_footer');
 Route::get('data/header_images', [CoreController::class, 'headerImages'])->name('data.header_images');
 Route::get('data/header_slider_texts', [CoreController::class, 'headerSliderTexts'])->name('data.header_slider_texts');
 Route::get('data/about_us', [CoreController::class, 'aboutUs'])->name('data.about_us');

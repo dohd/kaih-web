@@ -2,9 +2,11 @@
   <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
     <a href="/" class="logo d-flex align-items-center">
-      <!-- Uncomment the line below if you also wish to use an image logo -->
-      <!-- <img src="assets/img/logo.png" alt=""> -->
-      <h1 class="sitename">KAIH</h1>
+      <!-- image logo -->
+      @if (@$headerFooter['logo'])
+        <img src="{{ $headerFooter['logo']['url'] }}" alt="{{ explode('.', $headerFooter['logo']['fileName'])[0] }}"> 
+      @endif
+      <h1 class="sitename">{{ @$headerFooter['shortName'] ?: config('app.name') }}</h1>
     </a>
 
     <nav id="navmenu" class="navmenu">
@@ -12,7 +14,7 @@
         <li><a href="/#about">About Us</a></li>
         <li><a href="/#services">Our Programs</a></li>
         <li><a href="/#pricing">Our Partners</a></li>
-        <li><a href="{{ route('news') }}" data-link="news">News</a></li>
+        <li><a href="{{ route('news') }}" data-link="news">News & Blog</a></li>
         <!-- 
         <li class="dropdown"><a href="#"><span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
           <ul>

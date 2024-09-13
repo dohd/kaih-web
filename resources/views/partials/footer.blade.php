@@ -1,20 +1,20 @@
 <footer id="footer" class="footer dark-background">
   <div class="container">
-    <h3 class="sitename">Kenya Association of the Intellectually Handicapped</h3>
-    <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+    <h3 class="sitename">{{ @$headerFooter['name'] ?: config('app.name') }}</h3>
+    <p>{{ @$headerFooter['slogan'] }}</p>
     <div class="social-links d-flex justify-content-center">
-      <a href=""><i class="bi bi-twitter-x"></i></a>
-      <a href=""><i class="bi bi-facebook"></i></a>
-      <a href=""><i class="bi bi-instagram"></i></a>
-      <a href=""><i class="bi bi-skype"></i></a>
-      <a href=""><i class="bi bi-linkedin"></i></a>
+      <a href="{{ @$headerFooter['twitterUrl'] ?: '#contact' }}"><i class="bi bi-twitter-x"></i></a>
+      <a href="{{ @$headerFooter['facebookUrl'] ?: '#contact' }}"><i class="bi bi-facebook"></i></a>
+      <a href="{{ @$headerFooter['instagramUrl'] ?: '#contact' }}"><i class="bi bi-instagram"></i></a>
+      <a href="{{ @$headerFooter['skypeUrl'] ?: '#contact' }}"><i class="bi bi-skype"></i></a>
+      <a href="{{ @$headerFooter['linkedInUrl'] ?: '#contact' }}"><i class="bi bi-linkedin"></i></a>
     </div>
     <div class="container">
       <div class="copyright">
-        <span>Copyright © 2024 | </span><strong class="px-1 sitename">KAIH</strong><span> | All Rights Reserved</span>
+        <span>Copyright © 2024 | </span><strong class="px-1 sitename">{{ @$headerFooter['shortName'] ?: config('app.name') }}</strong><span> | All Rights Reserved</span>
       </div>
       <div class="credits">
-        Designed by <a href="#">Proffer Systems</a>
+        Designed by <a href="#contact">Proffer Systems</a>
       </div>
     </div>
   </div>

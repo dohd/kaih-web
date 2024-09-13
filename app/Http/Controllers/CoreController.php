@@ -38,7 +38,30 @@ class CoreController extends Controller
             'partners' => $this->partners()->original,
             'blogPosts' => $this->blogPosts(3)->original,
             'contacts' => $this->contacts()->original,
+            'headerFooter' => $this->headerFooter()->original,
         ]);
+    }
+
+    /**
+     * Fetch Header Footer
+     * @return json
+     */
+    public function headerFooter()
+    {
+        try {
+            $query = $this->query->setContentType('headerFooter');
+            $entries = $this->client->getEntries($query);
+            $headerFooter = array_map(function ($entry) {
+                $entry_mod = toArray($entry)['fields'];
+                $entry_mod['logo'] = $entry->getLogo()? toArray($entry->getLogo()->getFile()) : [];
+                return $entry_mod;
+            }, $entries->getItems());
+        } catch (\Throwable $th) {
+            //throw $th;
+            // dd($th);
+        }
+        $headerFooter = @$headerFooter[0] ?: []; 
+        return response()->json($headerFooter);
     }
 
     /**
@@ -49,7 +72,7 @@ class CoreController extends Controller
     {
         try {
             $query = $this->query->setContentType('header_images');
-            $client = $this->client->getEntries($query);
+            $entry = $this->client->getEntries($query);
             $images = array_map(fn ($client) => array_map(fn ($v) => toArray($v->getFile()), $client->getImage()), $client->getItems());
         } catch (\Throwable $th) {
             //throw $th;

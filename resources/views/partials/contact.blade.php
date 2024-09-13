@@ -13,7 +13,7 @@
           <div>
             <h3>Address</h3>
             {{-- <p>Buru Buru Phase 5, <br>near The Point Mall at Mai Mahiu Court, <br>Plot Number 439</p> --}}
-            <p>{{ $contacts['location'] }}</p>
+            <p>{{ @$contacts['location'] }}</p>
           </div>
         </div><!-- End Info Item -->
 
@@ -21,7 +21,7 @@
           <i class="bi bi-telephone flex-shrink-0"></i>
           <div>
             <h3>Call Us</h3>
-            <p>({{ $contacts['countryCode'] }}) {{ $contacts['phone'] }}</p>
+            <p>({{ @$contacts['countryCode'] }}) {{ @$contacts['phone'] }}</p>
           </div>
         </div><!-- End Info Item -->
 
@@ -29,7 +29,7 @@
           <i class="bi bi-envelope flex-shrink-0"></i>
           <div>
             <h3>Email Us</h3>
-            <p>{{ $contacts['email'] }}</p>
+            <p>{{ @$contacts['email'] }}</p>
           </div>
         </div><!-- End Info Item -->
 
