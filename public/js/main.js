@@ -61,6 +61,65 @@
   }
 
   /**
+   * Sound wave button
+   */
+  let soundWave = document.querySelector('.sound-wave');
+
+  function toggleSoundWave() {
+    if (soundWave) {
+      window.scrollY > 100 ? soundWave.classList.add('active') : soundWave.classList.remove('active');
+    }
+  }
+
+  let voices = [];
+  // Function to initialize the voices and ensure they load properly
+  function loadVoices() {
+    voices = window.speechSynthesis.getVoices();
+    if (voices.length === 0) {
+      // If voices are not loaded yet, wait for the 'voiceschanged' event
+      window.speechSynthesis.addEventListener('voiceschanged', () => {
+        voices = window.speechSynthesis.getVoices();
+      });
+    }
+  }
+  // Load voices immediately when the page is loaded
+  loadVoices();
+
+  // Function to get highlighted text
+  function getSelectedText() {
+    if (window.getSelection) {
+      return window.getSelection().toString();
+    } else if (document.selection && document.selection.type !== "Control") {
+      return document.selection.createRange().text;
+    }
+    return '';
+  }
+
+  // Function to convert text to speech using the Web Speech API
+  function speakText(text) {
+    window.speechSynthesis.cancel();
+    if (!text) return alert("Please highlight some text to read aloud.");
+    const synth = window.speechSynthesis;
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    // Make sure we have voices loaded
+    if (voices.length === 0) loadVoices();
+    // Optional: Set a specific voice if available
+    utterance.voice = voices.find(voice => voice.lang === 'en-US') || voices[0]; // Default to first voice
+    utterance.pitch = 1; // Default pitch
+    utterance.rate = 1;  // Default speed
+    synth.speak(utterance);
+  }
+  
+  soundWave.addEventListener('click', (e) => {
+    e.preventDefault();
+    speakText(getSelectedText());
+  });
+
+  window.addEventListener('load', toggleSoundWave);
+  document.addEventListener('scroll', toggleSoundWave);
+
+  /**
    * Scroll top button
    */
   let scrollTop = document.querySelector('.scroll-top');

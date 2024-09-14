@@ -5,10 +5,10 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>@yield('title')</title>
     <meta content="KAIH" name="description">
-    <meta content="KAIH" name="keywords">
+    <meta content="KAIH, PWDs, NGO,  Intellectual Disability" name="keywords">
 
     <!-- Favicons -->
-    
+    <link rel="icon" type="image/x-icon" href="{{ @$headerFooter['logo']['url'] }}">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -45,6 +45,9 @@
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+    <!-- Sound Wave -->
+    <a href="javascript:" class="sound-wave d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Text To Speech"><i class="bi bi-soundwave"></i></a>
+      
     <!-- Preloader -->
     <div id="preloader"></div>
 

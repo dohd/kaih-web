@@ -515,6 +515,40 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# Soundwave Button
+--------------------------------------------------------------*/
+.sound-wave {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  right: 15px;
+  bottom: 65px;
+  z-index: 99999;
+  background-color: #0d6efd;
+  width: 44px;
+  height: 44px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.sound-wave i {
+  font-size: 24px;
+  color: var(--contrast-color);
+  line-height: 0;
+}
+
+.sound-wave:hover {
+  background-color: color-mix(in srgb, #0d6efd, transparent 20%);
+  color: var(--contrast-color);
+}
+
+.sound-wave.active {
+  visibility: visible;
+  opacity: 1;
+  bottom: 65px;
+}
+
+/*--------------------------------------------------------------
 # Scroll Top Button
 --------------------------------------------------------------*/
 .scroll-top {
