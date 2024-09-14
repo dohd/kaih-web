@@ -88,41 +88,41 @@
   const headerImages = @json(@$headerImages);
   if (headerImages.length) {
     const images = headerImages.map(v => v.url);
-    const el = document.getElementById('hero');
+    const hero = document.getElementById('hero');
 
     // Set the first image as default
-    el.style.backgroundImage = `url(${images[0]})`;
-    el.style.backgroundRepeat = 'no-repeat';
-    el.style.backgroundSize = 'cover';
-    el.style.backgroundPosition = 'center';
+    hero.style.backgroundImage = `url(${images[0]})`;
+    hero.style.backgroundRepeat = 'no-repeat';
+    hero.style.backgroundSize = 'cover';
+    hero.style.backgroundPosition = 'center';
 
     let i = 0;
     const duration = 1000; // 1 second fade duration
     const interval = 6000; // 6 seconds before switching images
     function changeBackgroundImage() {
       // Add fade-out effect
-      el.classList.add('fade-out');
+      hero.classList.add('fade-out');
       setTimeout(() => {
         // Change background image
         i = (i + 1) % images.length;
-        el.style.backgroundImage = `url(${images[i]})`;
+        hero.style.backgroundImage = `url(${images[i]})`;
         // Add fade-in effect after changing the image
-        el.classList.remove('fade-out');
-        el.classList.add('fade-in');
+        hero.classList.remove('fade-out');
+        hero.classList.add('fade-in');
       }, duration); // Wait for fade-out to complete
     }
   
-    function onHeroMouseOver() {
+    function mouseOver() {
       setTimeout(() => {
-        el.removeEventListener('mouseover', onHeroMouseOver);
+        hero.removeEventListener('mouseover', mouseOver);
         // Remove initial image-background with transitional
-        el.classList.remove('image-bg');
-        el.classList.add('ts-background');
+        hero.classList.remove('image-bg');
+        hero.classList.add('ts-background');
         // Automatically change the background every few seconds
         setInterval(changeBackgroundImage, interval + duration);
       }, 1000);
     }
-    el.addEventListener('mouseover', onHeroMouseOver);
+    hero.addEventListener('mouseover', mouseOver);
   }
 </script>
 @endsection

@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Recent News - KAIH')
+@section('title', 'Recent News')
 @section('body-class', 'class=blog-page')
 
 @section('content')

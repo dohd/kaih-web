@@ -329,6 +329,7 @@ class CoreController extends Controller
     public function news()
     {
         return view('news', [
+            'headerFooter' => $this->headerFooter()->original,
             'blogPosts' => $this->blogPosts(0, request('tag'))->original,
         ]);
     }
@@ -343,8 +344,9 @@ class CoreController extends Controller
         if (!$blogPost) return redirect()->back();
 
         $postTagsCount = $this->postTagsCount()->original;
+        $headerFooter = $this->headerFooter()->original;
 
-        return view('news_details', compact('blogPost', 'postTagsCount'));
+        return view('news_details', compact('headerFooter', 'blogPost', 'postTagsCount'));
     }
 
     /**
@@ -355,8 +357,9 @@ class CoreController extends Controller
     {
         $program = $this->program($id)->original;
         if (!$program) return redirect()->back();
+        $headerFooter = $this->headerFooter()->original;
 
-        return view('program_details', compact('program'));
+        return view('program_details', compact('headerFooter', 'program'));
     }
 
     /**

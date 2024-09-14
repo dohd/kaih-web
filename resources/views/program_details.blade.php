@@ -1,5 +1,5 @@
 @extends('layout')
-@section('title', 'Program - KAIH')
+@section('title', 'Program')
 @section('body-class', 'class=service-details-page')
 
 @section('content')
