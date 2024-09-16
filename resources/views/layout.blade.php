@@ -36,6 +36,10 @@
     @include('partials.header')
     <!-- /Header Section -->
 
+    <!-- Accessbility Sidebar -->
+    @include('partials.accessibility_sider')
+    <!-- /Accessbility Sidebar -->
+
     @yield('content')
 
     <!-- Footer -->
@@ -44,9 +48,6 @@
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Sound Wave -->
-    <a href="javascript:" class="sound-wave d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Text To Speech"><i class="bi bi-soundwave"></i></a>
       
     <!-- Preloader -->
     <div id="preloader"></div>

@@ -54,16 +54,15 @@
 <section id="hero" class="hero section dark-background image-bg">
   <div id="hero-carousel" data-bs-interval="5000" class="container carousel carousel-fade" data-bs-ride="carousel">
     <!-- Slides -->
-    @foreach ($headerSliderTexts as $i => $item)
-      <div class="carousel-item {{ !$i ? 'active' : '' }}">
-        <div class="carousel-container">
-          <h2 class="animate__animated animate__fadeInDown">{{ $item['title'] }}</h2>
-          <p class="animate__animated animate__fadeInUp">{{ $item['body'] }}</p>
-        </div>
-      </div>
-    @endforeach
-    
     @if ($headerSliderTexts)
+      @foreach ($headerSliderTexts as $i => $item)
+        <div class="carousel-item {{ !$i ? 'active' : '' }}">
+          <div class="carousel-container">
+            <h2 class="animate__animated animate__fadeInDown">{{ $item['title'] }}</h2>
+            <p class="animate__animated animate__fadeInUp">{{ $item['body'] }}</p>
+          </div>
+        </div>
+      @endforeach
       <a class="carousel-control-prev" href="#hero-carousel" role="button" data-bs-slide="prev">
         <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
       </a>

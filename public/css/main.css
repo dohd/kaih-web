@@ -515,37 +515,76 @@ h6 {
 }
 
 /*--------------------------------------------------------------
-# Soundwave Button
+# Accessibility Tools Button
 --------------------------------------------------------------*/
-.sound-wave {
+/* Sidebar Styles */
+.sidebar {
   position: fixed;
-  visibility: hidden;
-  opacity: 0;
-  right: 15px;
-  bottom: 65px;
-  z-index: 99999;
-  background-color: #0d6efd;
-  width: 44px;
-  height: 44px;
-  border-radius: 50px;
-  transition: all 0.4s;
+  top: 20%;
+  left: -250px; /* Start hidden */
+  width: 200px;
+  background-color: white;
+  padding-top: 20px;
+  transition: left 0.3s ease; /* Slide-in transition */
+  z-index: 9999;
+  opacity: 0.95;
 }
 
-.sound-wave i {
-  font-size: 24px;
-  color: var(--contrast-color);
-  line-height: 0;
+/* Sidebar active class when it's shown */
+.sidebar.active {
+  left: 0;
 }
 
-.sound-wave:hover {
-  background-color: color-mix(in srgb, #0d6efd, transparent 20%);
-  color: var(--contrast-color);
+/* Handle Styles */
+.handle {
+  position: fixed;
+  top: 20%;
+  left: 0; /* Start hidden together with the sidebar */
+  width: 40px;
+  height: 45px;
+  font-size: 32px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10000;
+  border-radius: 0 5px 5px 0;
+  transition: left 0.3s ease; /* Slide-in transition */
 }
 
-.sound-wave.active {
-  visibility: visible;
-  opacity: 1;
-  bottom: 65px;
+.sidebar .nav-link {
+  color: black;
+}
+.sidebar .nav-link:hover {
+  color: #007aff;
+}
+
+/* When the sidebar is active, move the handle */
+.sidebar.active ~ .handle {
+  left: 200px; /* Move the handle out with the sidebar */
+}
+
+/*--------------------------------------------------------------
+# High Contrast Mode
+--------------------------------------------------------------*/
+/* Style for high contrast mode */
+.high-contrast {
+  background-color: black !important;
+  color: yellow !important;
+}
+/* High contrast links */
+.high-contrast a {
+  color: cyan !important;
+}
+/* Style for negative contrast mode */
+.negative-contrast {
+  background-color: black !important;
+  color: white !important;
+}
+/* Negative contrast links */
+.negative-contrast a {
+  color: white !important;
 }
 
 /*--------------------------------------------------------------

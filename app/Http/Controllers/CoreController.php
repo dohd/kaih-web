@@ -29,6 +29,18 @@ class CoreController extends Controller
      */
     public function index()
     {
+        // return view('index', [
+        //     'headerFooter' => $this->headerFooter()->original,
+        //     'headerImages' => [],
+        //     'headerSliderTexts' => [],
+        //     'aboutUs' => $this->aboutUs()->original,
+        //     'pillars' => [],
+        //     'programs' => [],
+        //     'testimonials' => [],
+        //     'partners' => [],
+        //     'blogPosts' => [],
+        //     'contacts' => [],
+        // ]);
         return view('index', [
             'headerFooter' => $this->headerFooter()->original,
             'headerImages' => $this->headerImages()->original,

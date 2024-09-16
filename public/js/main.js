@@ -61,18 +61,118 @@
   }
 
   /**
-   * Sound wave button
+   * Toggle Accessibility Tools sidebar
    */
-  let soundWave = document.querySelector('.sound-wave');
+  const acccesibilityToolSidebar = document.querySelector('#at-sidebar');
+  const acccesibilityToolToggle = document.querySelector('#at-sidebar-toggle');
+  acccesibilityToolToggle.addEventListener('click', function() {
+    acccesibilityToolSidebar.classList.toggle('active'); // Show or hide sidebar
+  });
 
-  function toggleSoundWave() {
-    if (soundWave) {
-      window.scrollY > 100 ? soundWave.classList.add('active') : soundWave.classList.remove('active');
-    }
+  /**
+   * Toggle Zoom-In and Zoom-Out
+   */
+  let zoomLevel = 1; // Default zoom level
+  // Function to apply zoom
+  function applyZoom() {
+    document.body.style.transform = `scale(${zoomLevel})`;
+    document.body.style.transformOrigin = '0 0'; // Ensures zoom is applied from the top-left
+    document.body.style.width = `${100 / zoomLevel}%`; // Adjust the width to prevent content overflow
   }
+  const zoomInToggleButton = document.querySelector('.at-zoom-in');
+  zoomInToggleButton.addEventListener('click', function() {
+    zoomLevel += 0.1;
+    applyZoom();
+  });
+  const zoomOutToggleButton = document.querySelector('.at-zoom-out');
+  zoomOutToggleButton.addEventListener('click', function() {
+    // Prevent zooming out too much
+    if (zoomLevel > 0.5) { 
+      zoomLevel -= 0.1; // Decrease zoom level
+      applyZoom();
+    }
+  });
 
+
+  /**
+   * Toggle Grayscale filter
+  */
+  const grayscaleToggle = document.querySelector('.at-grayscale');
+  grayscaleToggle.addEventListener('click', function () {
+    document.body.style.filter = 'grayscale(100%)'; // 100% grayscale
+  });
+
+  /**
+   * Toggle Contrast
+  */
+  const highContrastToggle = document.querySelector('.at-high-contrast');
+  highContrastToggle.addEventListener('click', function () {
+    document.body.classList.add('high-contrast'); 
+    document.querySelector('.main').classList.add('high-contrast'); 
+    document.querySelector('.footer').classList.add('high-contrast'); 
+    document.querySelector('.header').classList.add('high-contrast'); 
+    document.querySelectorAll('.section').forEach(el => el.classList.add('high-contrast')); 
+    document.querySelectorAll('p').forEach(el => el.classList.add('high-contrast')); 
+    document.querySelectorAll('li').forEach(el => el.classList.add('high-contrast')); 
+  });
+  const negativeContrastToggle = document.querySelector('.at-negative-contrast');
+  negativeContrastToggle.addEventListener('click', function () {
+    document.body.classList.add('negative-contrast'); 
+    document.querySelector('.main').classList.add('negative-contrast'); 
+    document.querySelector('.footer').classList.add('negative-contrast'); 
+    document.querySelector('.header').classList.add('negative-contrast'); 
+    document.querySelectorAll('.section').forEach(el => el.classList.add('negative-contrast')); 
+    document.querySelectorAll('p').forEach(el => el.classList.add('negative-contrast')); 
+    document.querySelectorAll('li').forEach(el => el.classList.add('negative-contrast')); 
+  });
+
+  /**
+   * Toggle Link Underline
+  */
+  const linkUnderlineToggle = document.querySelector('.at-link-underline');
+  linkUnderlineToggle.addEventListener('click', function () {
+    document.querySelectorAll('a').forEach(el => {el.style.textDecoration = 'underline'}); 
+  });
+
+  /**
+   * Reset Accessibility Tool Features
+   */
+  const acccesibilityToolReset = document.querySelector('.at-reset');
+  acccesibilityToolReset.addEventListener('click', function() {
+    // Reset zoom to default
+    zoomLevel = 1; 
+    applyZoom();
+    // Cancel speech synthesis
+    window.speechSynthesis.cancel();
+    // Remove grayscale filter
+    document.body.style.filter = 'none';
+    // Remove high contrast class
+    document.body.classList.remove('high-contrast'); 
+    document.querySelector('.main').classList.remove('high-contrast'); 
+    document.querySelector('.footer').classList.remove('high-contrast'); 
+    document.querySelector('.header').classList.remove('high-contrast'); 
+    document.querySelectorAll('.section').forEach(el => el.classList.remove('high-contrast')); 
+    document.querySelectorAll('p').forEach(el => el.classList.remove('high-contrast'));
+    document.querySelectorAll('li').forEach(el => el.classList.remove('high-contrast'));
+    // Remove negative contrast class
+    document.body.classList.remove('negative-contrast'); 
+    document.querySelector('.main').classList.remove('negative-contrast'); 
+    document.querySelector('.footer').classList.remove('negative-contrast'); 
+    document.querySelector('.header').classList.remove('negative-contrast'); 
+    document.querySelectorAll('.section').forEach(el => el.classList.remove('negative-contrast')); 
+    document.querySelectorAll('p').forEach(el => el.classList.remove('negative-contrast'));
+    document.querySelectorAll('li').forEach(el => el.classList.remove('negative-contrast'));
+    // Remove link underline
+    document.querySelectorAll('a').forEach(el => {el.style.textDecoration = 'none'}); 
+  });
+
+
+
+
+  /**
+   * Toggle Text to Speech
+   */
   let voices = [];
-  // Function to initialize the voices and ensure they load properly
   function loadVoices() {
     voices = window.speechSynthesis.getVoices();
     if (voices.length === 0) {
@@ -82,10 +182,8 @@
       });
     }
   }
-  // Load voices immediately when the page is loaded
-  loadVoices();
+  loadVoices(); // Load voices immediately when the page is loaded
 
-  // Function to get highlighted text
   function getSelectedText() {
     if (window.getSelection) {
       return window.getSelection().toString();
@@ -94,8 +192,7 @@
     }
     return '';
   }
-
-  // Function to convert text to speech using the Web Speech API
+  // Convert text to speech using the Web Speech API
   function speakText(text) {
     window.speechSynthesis.cancel();
     if (!text) return alert("Please highlight some text to read aloud.");
@@ -110,14 +207,12 @@
     utterance.rate = 1;  // Default speed
     synth.speak(utterance);
   }
-  
+
+  let soundWave = document.querySelector('.at-soundwave');
   soundWave.addEventListener('click', (e) => {
     e.preventDefault();
     speakText(getSelectedText());
   });
-
-  window.addEventListener('load', toggleSoundWave);
-  document.addEventListener('scroll', toggleSoundWave);
 
   /**
    * Scroll top button
