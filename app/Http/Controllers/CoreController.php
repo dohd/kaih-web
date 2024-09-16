@@ -389,9 +389,9 @@ class CoreController extends Controller
     public function clearCache() 
     {   
         try {
-            Artisan::call('cache:clear');
-            Artisan::call('route:cache');
-            Artisan::call('config:cache');
+            \Artisan::call('cache:clear');
+            \Artisan::call('route:cache');
+            \Artisan::call('config:cache');
             return "Web cache cleared";
         } catch (\Throwable $th) {
             return "Something went wrong! " . $th->getMessage();
@@ -403,7 +403,7 @@ class CoreController extends Controller
      */
     public function siteDown() 
     {
-        Artisan::call('down');
+        \Artisan::call('down');
         return redirect()->back();
     }
 }
