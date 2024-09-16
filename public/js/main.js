@@ -112,6 +112,7 @@
     document.querySelector('.footer').classList.add('high-contrast'); 
     document.querySelector('.header').classList.add('high-contrast'); 
     document.querySelectorAll('.section').forEach(el => el.classList.add('high-contrast')); 
+    document.querySelectorAll('.sidebar').forEach(el => el.classList.add('high-contrast')); 
     document.querySelectorAll('p').forEach(el => el.classList.add('high-contrast')); 
     document.querySelectorAll('li').forEach(el => el.classList.add('high-contrast')); 
   });
@@ -122,6 +123,7 @@
     document.querySelector('.footer').classList.add('negative-contrast'); 
     document.querySelector('.header').classList.add('negative-contrast'); 
     document.querySelectorAll('.section').forEach(el => el.classList.add('negative-contrast')); 
+    document.querySelectorAll('.sidebar').forEach(el => el.classList.add('negative-contrast')); 
     document.querySelectorAll('p').forEach(el => el.classList.add('negative-contrast')); 
     document.querySelectorAll('li').forEach(el => el.classList.add('negative-contrast')); 
   });

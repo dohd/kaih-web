@@ -1,5 +1,5 @@
-<div id="at-sidebar" class="sidebar section">
-  <ul class="nav flex-column"><li class="nav-item text-primary ps-3"><p><b>Accessibility Tools</b></p></li></ul>
+<div id="at-sidebar" class="sidebar">
+  <ul class="nav flex-column"><li class="nav-item text-primary ps-3"><b>Accessibility Tools</b></li></ul>
   <ul class="nav flex-column">
     <li class="nav-item"><a class="nav-link at-zoom-in" href="javascript:"><i class="bi bi-zoom-in h5"></i> Increase Text</a></li>
     <li class="nav-item"><a class="nav-link at-zoom-out" href="javascript:"><i class="bi bi-zoom-out h5"></i> Decrease Text</a></li>

@@ -520,7 +520,7 @@ h6 {
 /* Sidebar Styles */
 .sidebar {
   position: fixed;
-  top: 20%;
+  top: 200px;
   left: -250px; /* Start hidden */
   width: 200px;
   background-color: white;
@@ -538,7 +538,7 @@ h6 {
 /* Handle Styles */
 .handle {
   position: fixed;
-  top: 20%;
+  top: 200px;
   left: 0; /* Start hidden together with the sidebar */
   width: 40px;
   height: 45px;
