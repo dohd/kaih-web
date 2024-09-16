@@ -34,3 +34,6 @@ Route::get('data/blog_posts', [CoreController::class, 'blogPosts'])->name('data.
 Route::get('data/blog_posts/{id}', [CoreController::class, 'blogPost'])->name('data.get_blog_post');
 Route::get('data/post_tags_count', [CoreController::class, 'postTagsCount'])->name('data.post_tags_count');
 
+// Configuration
+Route::get('clear-cache', [CoreController::class, 'clearCache'])->name('config.clear_cache');
+Route::get('site-down', [CoreController::class, 'siteDown'])->name('config.site_down');

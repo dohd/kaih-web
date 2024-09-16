@@ -382,4 +382,28 @@ class CoreController extends Controller
     {
         return view('error_404');
     }
+
+    /**
+     * Clear Cache
+     */
+    public function clearCache() 
+    {   
+        try {
+            Artisan::call('cache:clear');
+            Artisan::call('route:cache');
+            Artisan::call('config:cache');
+            return "Web cache cleared";
+        } catch (\Throwable $th) {
+            return "Something went wrong! " . $th->getMessage();
+        }
+    }
+
+    /**
+     * Maintenance Mode
+     */
+    public function siteDown() 
+    {
+        Artisan::call('down');
+        return redirect()->back();
+    }
 }
